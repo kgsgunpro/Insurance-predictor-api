@@ -1,15 +1,34 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, computed_field
 from typing import Literal, Annotated
 import pickle
 import pandas as pd
+from pathlib import Path
 
 # import the ml model
-with open('model.pkl', 'rb') as f:
+MODEL_PATH = Path(__file__).resolve().parent / "model.pkl"
+
+with MODEL_PATH.open('rb') as f:
     model = pickle.load(f)
 
 app = FastAPI()
+
+# Update this list with the URL(s) where the browser-based frontend is hosted.
+# The local origins below support Streamlit's default development ports.
+allowed_origins = [
+    "http://localhost:8501",
+    "http://127.0.0.1:8501",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 tier_1_cities = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Pune"]
 tier_2_cities = [

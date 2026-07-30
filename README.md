@@ -98,6 +98,5 @@ See the component-level READMEs for setup and implementation details: [frontend]
 ## Notes for deployment
 
 - Deploy the FastAPI backend first and replace `API_URL` in the frontend with the deployed `/predict` URL.
-- Configure CORS on the API if the frontend is hosted in a browser on a different domain.
-- Keep `model.pkl` alongside `app.py`, as the API loads it when it starts.
-
+- The API permits Streamlit's standard local development origins. Add your deployed frontend URL to `allowed_origins` in `app.py` before production deployment.
+- Keep `model.pkl` alongside `app.py`; the API resolves the model path relative to the application file when it starts.

@@ -20,7 +20,7 @@ This directory contains the prediction API, training data, experiment notebook, 
 
 ## Setup and run
 
-Run these commands from this directory so the application can locate `model.pkl`:
+`model.pkl` is loaded from the same directory as `app.py`, so the service can be started from this directory or from the repository root.
 
 ```powershell
 python -m venv .venv
@@ -78,5 +78,21 @@ The Streamlit frontend should send requests to:
 http://127.0.0.1:8000/predict
 ```
 
-For cross-origin browser deployments, add suitable CORS middleware to the FastAPI application.
+### CORS configuration
 
+CORS middleware is configured for Streamlit's local development origins:
+
+```text
+http://localhost:8501
+http://127.0.0.1:8501
+```
+
+When deploying a browser-based frontend on another domain, add its exact URL to `allowed_origins` in `app.py`. For example:
+
+```python
+allowed_origins = [
+    "https://your-frontend.example.com",
+]
+```
+
+Avoid using `"*"` for `allow_origins` in production, especially when credentials are enabled.
