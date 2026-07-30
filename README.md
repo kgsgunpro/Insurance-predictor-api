@@ -2,6 +2,13 @@
 
 A full-stack machine-learning project that predicts an insurance premium category from an applicant's profile. It is designed as a compact end-to-end demonstration: a Streamlit interface collects data, a FastAPI service validates and enriches it, and a saved machine-learning model returns the prediction.
 
+## Live demo
+
+- **Web application:** [insurancepredicto.streamlit.app](https://insurancepredicto.streamlit.app/)
+- **API documentation:** [FastAPI Swagger UI](https://insurance-predictor-api.fastapicloud.dev/docs)
+
+These public deployments are provided for demonstration. The project can also be run locally using the instructions below.
+
 ## What it demonstrates
 
 - A simple, user-friendly ML prediction interface
